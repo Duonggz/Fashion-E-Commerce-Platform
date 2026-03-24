@@ -1,0 +1,125 @@
+.product-detail {
+  display: flex;
+  gap: 80px;
+  padding: 100px 60px 60px; /* ← tăng padding-top để tránh bị header che */
+  align-items: center; /* ← căn giữa dọc giữa ảnh và info */
+  min-height: calc(100vh - 72px);
+  max-width: 1200px;
+  margin: 0 auto; /* ← căn giữa toàn bộ layout */
+}
+
+.product-images {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-image {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.product-title {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.product-price {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.product-description {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.size-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.size-grid {
+  display: flex;
+  gap: 10px;
+}
+
+.size-btn {
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.size-btn:hover:not(.disabled) {
+  border-color: black;
+}
+
+.size-btn.active {
+  color: black;
+  border: 2px solid black;
+}
+
+.size-btn.disabled {
+  background: #eee;
+  color: #aaa;
+  border: 1px solid #ddd;
+  cursor: not-allowed;
+}
+
+.quantity {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  color: black;
+}
+
+.quantity button {
+  width: 35px;
+  height: 35px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.quantity button:hover {
+  border-color: black;
+}
+
+.add-cart {
+  width: 100%;
+  padding: 16px;
+  background: black;
+  color: white;
+  border: none;
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.add-cart:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
