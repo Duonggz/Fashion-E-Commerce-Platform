@@ -1,7 +1,24 @@
 import { FastifyInstance } from "fastify"
 import Product from "../models/Product"
-import fs from "fs"
-import path from "path"
+import { v2 as cloudinary } from "cloudinary"
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+async function uploadToCloudinary(buffer: Buffer, filename: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload_stream(
+      { folder: "tmdt", public_id: Date.now() + "-" + filename },
+      (error, result) => {
+        if (error) reject(error)
+        else resolve(result!.secure_url)
+      }
+    ).end(buffer)
+  })
+}
 
 export async function productRoutes(fastify: FastifyInstance) {
 
@@ -10,187 +27,91 @@ export async function productRoutes(fastify: FastifyInstance) {
     return await Product.find()
   })
 
-  // GET BY TAG (chỉ lấy sản phẩm active)
+  // GET BY TAG
   fastify.get("/tag/:tag", async (request) => {
-
     const { tag } = request.params as any
-
-    return await Product.find({
-      tags: tag,
-      active: true
-    })
-
+    return await Product.find({ tags: tag, active: true })
   })
 
   fastify.get("/:id", async (request) => {
-
-  const { id } = request.params as any
-
-  return await Product.findById(id)
-
+    const { id } = request.params as any
+    return await Product.findById(id)
   })
 
   // CREATE PRODUCT
   fastify.post("/", async (request) => {
-
     const parts = request.parts()
-
-    let name = ""
-    let price = 0
-    let description = ""
-    let tags: string[] = []
-    let sizes: any[] = []
-    let imageUrl = ""
+    let name = "", description = "", imageUrl = ""
+    let price = 0, tags: string[] = [], sizes: any[] = []
 
     for await (const part of parts) {
-
       if (part.type === "file") {
-
-        const filename = Date.now() + "-" + part.filename
-        const filepath = path.join("uploads", filename)
-
         const buffer = await part.toBuffer()
-
-        fs.writeFileSync(filepath, buffer)
-
-        imageUrl = `http://localhost:3000/uploads/${filename}`
-
+        imageUrl = await uploadToCloudinary(buffer, part.filename)
       }
-
       if (part.type === "field") {
-
         if (part.fieldname === "name") name = part.value as string
         if (part.fieldname === "price") price = Number(part.value)
         if (part.fieldname === "description") description = part.value as string
         if (part.fieldname === "tags") tags = JSON.parse(part.value as string)
         if (part.fieldname === "sizes") sizes = JSON.parse(part.value as string)
-
       }
-
     }
 
-    const product = await Product.create({
-      name,
-      price,
-      image: imageUrl,
-      description,
-      tags,
-      sizes,
-      active: true
-    })
-
-    return product
-
+    return await Product.create({ name, price, image: imageUrl, description, tags, sizes, active: true })
   })
 
   // DELETE PRODUCT
   fastify.delete("/:id", async (request) => {
-
     const { id } = request.params as any
-
     await Product.findByIdAndDelete(id)
-
     return { message: "Product deleted" }
-
   })
 
   // TOGGLE HIDE / SHOW
   fastify.put("/toggle/:id", async (request) => {
-
     const { id } = request.params as any
-
     const product = await Product.findById(id)
-
-    if (!product) {
-      return { message: "Product not found" }
-    }
-
+    if (!product) return { message: "Product not found" }
     product.active = !product.active
-
     await product.save()
-
     return product
-
   })
 
-    // EDIT PRODUCT
-    fastify.put("/:id", async (request) => {
+  // EDIT PRODUCT
+  fastify.put("/:id", async (request) => {
+    const { id } = request.params as any
+    const parts = request.parts()
+    let name = "", description = "", imageUrl = ""
+    let price = 0, tags: string[] = [], sizes: any[] = [], active = true
 
-  const { id } = request.params as any
-
-  const parts = request.parts()
-
-  let name = ""
-  let price = 0
-  let description = ""
-  let tags: string[] = []
-  let sizes: any[] = []
-  let imageUrl = ""
-  let active = true
-
-  for await (const part of parts) {
-
-    if (part.type === "file") {
-
-      const filename = Date.now() + "-" + part.filename
-      const filepath = path.join("uploads", filename)
-
-      const buffer = await part.toBuffer()
-
-      fs.writeFileSync(filepath, buffer)
-
-      imageUrl = `http://localhost:3000/uploads/${filename}`
-
+    for await (const part of parts) {
+      if (part.type === "file") {
+        const buffer = await part.toBuffer()
+        imageUrl = await uploadToCloudinary(buffer, part.filename)
+      }
+      if (part.type === "field") {
+        if (part.fieldname === "name") name = part.value as string
+        if (part.fieldname === "price") price = Number(part.value)
+        if (part.fieldname === "description") description = part.value as string
+        if (part.fieldname === "tags") tags = JSON.parse(part.value as string)
+        if (part.fieldname === "sizes") sizes = JSON.parse(part.value as string)
+        if (part.fieldname === "active") active = part.value === "true"
+      }
     }
 
-    if (part.type === "field") {
+    const updateData: any = { name, price, description, tags, sizes, active }
+    if (imageUrl) updateData.image = imageUrl
 
-      if (part.fieldname === "name") name = part.value as string
-      if (part.fieldname === "price") price = Number(part.value)
-      if (part.fieldname === "description") description = part.value as string
-      if (part.fieldname === "tags") tags = JSON.parse(part.value as string)
-      if (part.fieldname === "sizes") sizes = JSON.parse(part.value as string)
-      if (part.fieldname === "active") active = part.value === "true"
-
-    }
-
-  }
-
-  const updateData: any = {
-    name,
-    price,
-    description,
-    tags,
-    sizes,
-    active
-  }
-
-  if (imageUrl) {
-    updateData.image = imageUrl
-  }
-
-  const product = await Product.findByIdAndUpdate(
-    id,
-    updateData,
-    { new: true }
-  )
-
-  return product
-
-})
-
-fastify.get("/search", async (request, reply) => {
-  const { keyword } = request.query as { keyword:string }
-  if(!keyword) return []
-  const products = await Product.find({
-    $or: [
-      { name: { $regex: keyword, $options: "i" } }
-    ]
-
+    return await Product.findByIdAndUpdate(id, updateData, { new: true })
   })
-  .limit(20)
-  return products
-})
 
+  // SEARCH
+  fastify.get("/search", async (request) => {
+    const { keyword } = request.query as { keyword: string }
+    if (!keyword) return []
+    return await Product.find({
+      $or: [{ name: { $regex: keyword, $options: "i" } }]
+    }).limit(20)
+  })
 }
-
