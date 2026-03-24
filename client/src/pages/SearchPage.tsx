@@ -37,7 +37,7 @@ export default function SearchPage(){
 
         <div className="category-logo">
           <Link to="/">
-            <img src="/assets/icons/uniqlo-logo.png" alt="logo" />
+            <img src="/assets/icons/logotmdt3.png" alt="logo" />
           </Link>
         </div>
 
