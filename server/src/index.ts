@@ -21,8 +21,8 @@ const app = Fastify({
 // CORS phải đăng ký TRƯỚC tất cả routes
 app.register(cors, {
   origin: [
-    "https://tmdt1.netlify.app",
-    "https://tmdt2.netlify.app"
+    "https://tmdtclient.pages.dev",
+    "https://tmdtadmin.pages.dev"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"]
 })
