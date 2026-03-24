@@ -15,16 +15,14 @@ import path from "path"
 dotenv.config()
 
 const app = Fastify({
-  bodyLimit: 20 * 1024 * 1024 // 20MB
+  bodyLimit: 20 * 1024 * 1024
 })
 
-// CORS
-app.register(userRoutes,{ prefix:"/api/users" })
-
+// CORS phải đăng ký TRƯỚC tất cả routes
 app.register(cors, {
   origin: [
     "https://tmdt1.netlify.app",
-    "https://tmdt2.netlify.app"  // thay bằng URL admin thật
+    "https://tmdt2.netlify.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"]
 })
@@ -32,7 +30,7 @@ app.register(cors, {
 // upload ảnh
 app.register(multipart, {
   limits: {
-    fileSize: 20 * 1024 * 1024 // 20MB
+    fileSize: 20 * 1024 * 1024
   }
 })
 
@@ -42,25 +40,15 @@ app.register(fastifyStatic, {
   prefix: "/uploads/"
 })
 
-/* app.register(paymentRoutes,{
-prefix:"/api"
-}) */
-
-app.register(orderRoutes,{
-  prefix:"/api"
-}) 
-
-app.register(sepayRoutes,{
-  prefix:"/api"
-})
-
+// routes
+app.register(userRoutes, { prefix: "/api/users" })
+app.register(adminRoutes, { prefix: "/api/admin" })
+app.register(productRoutes, { prefix: "/api/products" })
+app.register(orderRoutes, { prefix: "/api" })
+app.register(sepayRoutes, { prefix: "/api" })
 
 // connect database
 connectDB()
-
-// routes
-app.register(adminRoutes, { prefix: "/api/admin" })
-app.register(productRoutes, { prefix: "/api/products" })
 
 app.listen({ port: Number(process.env.PORT) || 3000, host: "0.0.0.0" }, (err, address) => {
   if (err) {
@@ -69,4 +57,3 @@ app.listen({ port: Number(process.env.PORT) || 3000, host: "0.0.0.0" }, (err, ad
   }
   console.log(`Server running at ${address}`)
 })
-
