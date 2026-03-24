@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
@@ -9,7 +10,7 @@ const Orders = () => {
   const loadOrders = async () => {
 
     const res = await axios.get(
-      "http://localhost:3000/api/admin/orders"
+      `${API_BASE_URL}/api/admin/orders`
     )
 
     setOrders(res.data)
@@ -25,7 +26,7 @@ const Orders = () => {
   const confirmPayment = async(id:string)=>{
 
     await axios.put(
-      "http://localhost:3000/api/admin/orders/"+id+"/pay"
+      `${API_BASE_URL}/api/admin/orders/`+id+"/pay"
     )
 
     loadOrders()
@@ -34,7 +35,7 @@ const Orders = () => {
 
   const confirmShipping = async (id: string) => {
     await axios.put(
-      "http://localhost:3000/api/admin/orders/" + id + "/ship"
+      `${API_BASE_URL}/api/admin/orders/` + id + "/ship"
     )
     loadOrders()
   }
@@ -103,3 +104,5 @@ const Orders = () => {
 }
 
 export default Orders
+
+

@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -46,7 +47,7 @@ const Profile = () => {
 
       <button onClick={async ()=>{
         const res = await axios.put(
-          "http://localhost:3000/api/users/update/"+user._id,
+          `${API_BASE_URL}/api/users/update/`+user._id,
           form
         )
 
@@ -89,3 +90,6 @@ const Profile = () => {
 }
 
 export default Profile
+
+
+

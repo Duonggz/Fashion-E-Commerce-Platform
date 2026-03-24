@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import type { FC } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -28,7 +29,7 @@ const Category: FC<CategoryProps> = ({ title }) => {
     document.body.style.overflow = "auto"
 
     axios
-      .get(`http://localhost:3000/api/products/tag/${title}`)
+      .get(`${API_BASE_URL}/api/products/tag/${title}`)
       .then(res => {
         setProducts(res.data)
       })
@@ -118,3 +119,6 @@ const Category: FC<CategoryProps> = ({ title }) => {
 }
 
 export default Category
+
+
+

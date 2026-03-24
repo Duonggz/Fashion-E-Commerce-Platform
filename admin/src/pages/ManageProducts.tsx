@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import EditProduct from "./EditProduct"
@@ -19,7 +20,7 @@ const ManageProducts = () => {
   const loadProducts = async () => {
 
     const res = await axios.get(
-      "http://localhost:3000/api/products"
+      `${API_BASE_URL}/api/products`
     )
 
     setProducts(res.data)
@@ -36,7 +37,7 @@ const ManageProducts = () => {
   const deleteProduct = async (id:string) => {
 
     await axios.delete(
-      `http://localhost:3000/api/products/${id}`
+      `${API_BASE_URL}/api/products/${id}`
     )
 
     loadProducts()
@@ -47,7 +48,7 @@ const ManageProducts = () => {
   const toggleProduct = async (id:string) => {
 
     await axios.put(
-      `http://localhost:3000/api/products/toggle/${id}`
+      `${API_BASE_URL}/api/products/toggle/${id}`
     )
 
     loadProducts()
@@ -137,3 +138,5 @@ const ManageProducts = () => {
 }
 
 export default ManageProducts
+
+

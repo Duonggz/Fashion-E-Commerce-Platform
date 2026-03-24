@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useState } from "react"
 import axios from "axios"
 
@@ -48,7 +49,7 @@ const Products = () => {
     }
 
     await axios.post(
-      "http://localhost:3000/api/products",
+      `${API_BASE_URL}/api/products`,
       formData
     )
 
@@ -144,3 +145,5 @@ const Products = () => {
 }
 
 export default Products
+
+

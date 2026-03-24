@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -17,7 +18,7 @@ function Login()  {
     e.preventDefault()
 
     try {
-      const res = await axios.post("http://localhost:3000/api/admin/login", {
+      const res = await axios.post(`${API_BASE_URL}/api/admin/login`, {
         username,
         password
       })
@@ -77,3 +78,6 @@ const styles = {
 }
 
 export default Login
+
+
+

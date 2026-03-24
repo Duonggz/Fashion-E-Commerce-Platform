@@ -1,6 +1,7 @@
+import API_BASE_URL from "../config/api"
 import axios from "axios"
 
-const API = "http://localhost:3000/api/products"
+const API = `${API_BASE_URL}/api/products`
 
 export const addProduct = async (data: any) => {
   return axios.post(API, data)
@@ -9,4 +10,7 @@ export const addProduct = async (data: any) => {
 export const getProducts = async () => {
   return axios.get(API)
 }
+
+
+
 

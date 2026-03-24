@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -32,7 +33,7 @@ const ProductDetail = () => {
 
     const loadProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/products/${id}`)
+        const res = await axios.get(`${API_BASE_URL}/api/products/${id}`)
         setProduct(res.data)
       } catch (err) {
         console.error("Load product error", err)
@@ -204,3 +205,6 @@ const ProductDetail = () => {
 }
 
 export default ProductDetail
+
+
+

@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useState } from "react"
 import "../assets/styles/auth.css"
 import axios from "axios"
@@ -45,7 +46,7 @@ const Auth: React.FC = () => {
 
       const res = await axios.post(
 
-        "http://localhost:3000/api/users/login",
+        `${API_BASE_URL}/api/users/login`,
         loginData
 
       )
@@ -93,7 +94,7 @@ const Auth: React.FC = () => {
 
       await axios.post(
 
-        "http://localhost:3000/api/users/register",
+        `${API_BASE_URL}/api/users/register`,
         registerData
 
       )
@@ -339,3 +340,6 @@ const Auth: React.FC = () => {
 }
 
 export default Auth
+
+
+

@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import { useState } from "react"
 import axios from "axios"
 
@@ -44,7 +45,7 @@ const EditProduct = ({ product, reload }: any) => {
     }
 
     await axios.put(
-      `http://localhost:3000/api/products/${product._id}`,
+      `${API_BASE_URL}/api/products/${product._id}`,
       formData
     )
 
@@ -141,3 +142,5 @@ const EditProduct = ({ product, reload }: any) => {
 }
 
 export default EditProduct
+
+

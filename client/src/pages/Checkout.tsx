@@ -1,3 +1,4 @@
+import API_BASE_URL from "../config/api"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
@@ -55,7 +56,7 @@ const Checkout = () => {
       setPaid(false)
 
       const res = await axios.post(
-        "http://localhost:3000/api/checkout",
+        `${API_BASE_URL}/api/checkout`,
         {
           items: cart,
           user,
@@ -118,7 +119,7 @@ const Checkout = () => {
       try {
 
         const res = await axios.get(
-          "http://localhost:3000/api/order-status/" + orderId
+          `${API_BASE_URL}/api/order-status/` + orderId
         )
 
         if (res.data.status === "paid") {
@@ -227,3 +228,6 @@ const Checkout = () => {
 }
 
 export default Checkout
+
+
+
