@@ -22,7 +22,10 @@ const app = Fastify({
 app.register(userRoutes,{ prefix:"/api/users" })
 
 app.register(cors, {
-  origin: true,
+  origin: [
+    "https://tmdt1.netlify.app",
+    "https://tmdt2.netlify.app"  // thay bằng URL admin thật
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"]
 })
 
