@@ -36,6 +36,12 @@ export default async function sepayRoutes(app: FastifyInstance) {
         return { success: true }
       }
 
+      const { transferAmount } = req.body
+        if (!transferAmount || transferAmount < (order.totalPrice ?? 0)) {
+          console.log(`Sai số tiền | Cần: ${order.totalPrice} | Nhận: ${transferAmount}`)
+          return { success: false }
+        }
+
       for (const item of order.items) {
         const product = await Product.findById(item.productId)
 
