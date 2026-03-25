@@ -101,6 +101,12 @@ const Checkout = () => {
           setCart([])
           clearInterval(interval)
         }
+
+        if (res.data.status === "out_of_stock") {
+          setQr("")
+          clearInterval(interval)
+          alert("Rất tiếc! Sản phẩm vừa hết hàng. Vui lòng liên hệ shop để được hoàn tiền.")
+        }
       } catch (err) {
         console.log(err)
       }

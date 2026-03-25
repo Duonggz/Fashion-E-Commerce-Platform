@@ -37,10 +37,10 @@ export default async function sepayRoutes(app: FastifyInstance) {
       }
 
       const { transferAmount } = req.body
-        if (!transferAmount || transferAmount < (order.totalPrice ?? 0)) {
-          console.log(`Sai số tiền | Cần: ${order.totalPrice} | Nhận: ${transferAmount}`)
-          return { success: false }
-        }
+      if (!transferAmount || transferAmount < (order.totalPrice ?? 0)) {
+        console.log(`Sai số tiền | Cần: ${order.totalPrice} | Nhận: ${transferAmount}`)
+        return { success: false }
+      }
 
       for (const item of order.items) {
         const product = await Product.findById(item.productId)
@@ -61,7 +61,15 @@ export default async function sepayRoutes(app: FastifyInstance) {
 
         const current = product.sizes[sizeIndex].quantity || 0
         const qty = item.quantity || 0
-        const newQty = Math.max(0, current - qty)
+
+        if (current < qty) {
+          console.log(`HET HANG | Product: ${product.name} | Size: ${item.size} | Còn: ${current} | Cần: ${qty}`)
+          order.status = "out_of_stock"
+          await order.save()
+          return { success: false }
+        }
+
+        const newQty = current - qty
 
         console.log(
           `TRU KHO | Product: ${product.name} | Size: ${item.size} | Current: ${current} | Minus: ${qty} | New: ${newQty}`
@@ -69,7 +77,7 @@ export default async function sepayRoutes(app: FastifyInstance) {
 
         product.sizes[sizeIndex].quantity = newQty
         await product.save()
-      }
+      } // ← đóng for
 
       order.status = "paid"
       await order.save()
