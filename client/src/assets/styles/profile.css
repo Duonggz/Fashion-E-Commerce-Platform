@@ -1,0 +1,269 @@
+/* PAGE */
+.profile-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: Helvetica, Arial, sans-serif;
+  overflow: auto;
+}
+
+/* LOGO BAR */
+.profile-logo-bar {
+  padding: 16px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.profile-logo {
+  height: 36px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+/* LAYOUT 2 CỘT */
+.profile-layout {
+  display: flex;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.profile-left {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.profile-right {
+  flex: 1;
+  min-width: 0;
+}
+
+/* SECTION TITLE */
+.profile-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #111;
+}
+
+/* INFO BOX */
+.profile-info-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.profile-info-row {
+  margin-bottom: 12px;
+}
+
+.profile-info-label {
+  font-size: 12px;
+  color: #9ca3af;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.profile-info-value {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* FORM */
+.profile-form-label {
+  font-size: 12px;
+  color: #9ca3af;
+  display: block;
+  margin-bottom: 4px;
+  margin-top: 12px;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* BUTTONS */
+.profile-btn-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.profile-btn {
+  padding: 9px 18px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-btn-dark { background: #111; }
+.profile-btn-red { background: #ef4444; }
+.profile-btn-green { background: #10b981; }
+.profile-btn-gray { background: #6b7280; }
+
+/* ORDERS */
+.profile-empty {
+  text-align: center;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.profile-order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-order-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.profile-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.profile-order-header:hover {
+  background: #f8fafc;
+}
+
+.profile-order-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-order-id {
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: monospace;
+}
+
+.profile-order-date {
+  font-size: 13px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.profile-order-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-arrow {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+/* DROPDOWN */
+.profile-order-detail {
+  border-top: 1px solid #f1f5f9;
+  padding: 14px 16px;
+}
+
+/* TIMELINE */
+.profile-timeline {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.profile-timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.profile-timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.profile-timeline-line {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  z-index: 0;
+}
+
+.profile-timeline-label {
+  font-size: 10px;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ITEMS */
+.profile-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+}
+
+.profile-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.profile-item-size {
+  color: #6b7280;
+}
+
+/* TOTAL */
+.profile-total-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 15px;
+}
+
+.profile-total-label {
+  color: #6b7280;
+}
+
+.profile-total-value {
+  font-weight: 700;
+}
+
+/* ADDRESS */
+.profile-address {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}

@@ -177,12 +177,14 @@ const Orders = () => {
 const th: React.CSSProperties = {
   padding: "12px 16px",
   fontWeight: 600,
-  color: "#374151"
+  color: "#374151",
+  whiteSpace: "nowrap"
 }
 
 const td: React.CSSProperties = {
   padding: "12px 16px",
-  verticalAlign: "top"
+  verticalAlign: "top",
+  whiteSpace: "nowrap"
 }
 
 const btnBase: React.CSSProperties = {

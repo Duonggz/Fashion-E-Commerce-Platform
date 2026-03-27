@@ -127,54 +127,59 @@ export default async function orderRoutes(app: FastifyInstance) {
     return order
   })
 
+  app.get("/orders/user/:userId", async (req: any) => {
+    const orders = await Order.find({ userId: req.params.userId }).sort({ createdAt: -1 })
+    return orders
+  })
+
   // Hủy đơn → cộng lại kho
-app.put("/admin/orders/:id/cancel", async (req: any) => {
-  const order = await Order.findById(req.params.id)
-  if (!order) return { success: false }
+  app.put("/admin/orders/:id/cancel", async (req: any) => {
+    const order = await Order.findById(req.params.id)
+    if (!order) return { success: false }
 
-  for (const item of order.items) {
-    const product = await Product.findById(item.productId)
-    if (!product) continue
-    const sizeIndex = product.sizes.findIndex((s: any) => s.size === item.size)
-    if (sizeIndex !== -1) {
-      product.sizes[sizeIndex].quantity = (product.sizes[sizeIndex].quantity || 0) + (item.quantity || 0)
-      await product.save()
+    for (const item of order.items) {
+      const product = await Product.findById(item.productId)
+      if (!product) continue
+      const sizeIndex = product.sizes.findIndex((s: any) => s.size === item.size)
+      if (sizeIndex !== -1) {
+        product.sizes[sizeIndex].quantity = (product.sizes[sizeIndex].quantity || 0) + (item.quantity || 0)
+        await product.save()
+      }
     }
-  }
 
-  order.status = "cancelled"
-  await order.save()
-  return { success: true }
-})
+    order.status = "cancelled"
+    await order.save()
+    return { success: true }
+  })
 
-// Thành công
-app.put("/admin/orders/:id/success", async (req: any) => {
-  const order = await Order.findByIdAndUpdate(
-    req.params.id,
-    { status: "success" },
-    { new: true }
-  )
-  return order
-})
+  // Thành công
+  app.put("/admin/orders/:id/success", async (req: any) => {
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { status: "success" },
+      { new: true }
+    )
+    return order
+  })
 
-// Hoàn hàng → cộng lại kho
-app.put("/admin/orders/:id/return", async (req: any) => {
-  const order = await Order.findById(req.params.id)
-  if (!order) return { success: false }
+  // Hoàn hàng → cộng lại kho
+  app.put("/admin/orders/:id/return", async (req: any) => {
+    const order = await Order.findById(req.params.id)
+    if (!order) return { success: false }
 
-  for (const item of order.items) {
-    const product = await Product.findById(item.productId)
-    if (!product) continue
-    const sizeIndex = product.sizes.findIndex((s: any) => s.size === item.size)
-    if (sizeIndex !== -1) {
-      product.sizes[sizeIndex].quantity = (product.sizes[sizeIndex].quantity || 0) + (item.quantity || 0)
-      await product.save()
+    for (const item of order.items) {
+      const product = await Product.findById(item.productId)
+      if (!product) continue
+      const sizeIndex = product.sizes.findIndex((s: any) => s.size === item.size)
+      if (sizeIndex !== -1) {
+        product.sizes[sizeIndex].quantity = (product.sizes[sizeIndex].quantity || 0) + (item.quantity || 0)
+        await product.save()
+      }
     }
-  }
 
-  order.status = "returned"
-  await order.save()
-  return { success: true }
-})
+    order.status = "returned"
+    await order.save()
+    return { success: true }
+  })
 
 }
