@@ -8,15 +8,15 @@
 
 /* LOGO BAR */
 .profile-logo-bar {
-  padding: 16px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #fff;
 }
 
 .profile-logo {
-  height: 36px;
+  height: 80px;
   cursor: pointer;
   object-fit: contain;
+  font-size: 45px;
 }
 
 /* LAYOUT 2 CỘT */

@@ -15,13 +15,13 @@ const statusLabel: Record<string, string> = {
 }
 
 const statusColor: Record<string, string> = {
-  pending: "#f59e0b",
-  paid: "#3b82f6",
-  shipping: "#8b5cf6",
-  success: "#10b981",
-  cancelled: "#ef4444",
-  returned: "#f97316",
-  out_of_stock: "#6b7280"
+  pending: "#000000",
+  paid: "#000000",
+  shipping: "#000000",
+  success: "#000000",
+  cancelled: "#000000",
+  returned: "#000000",
+  out_of_stock: "#000000"
 }
 
 const Profile = () => {
@@ -136,7 +136,7 @@ const Profile = () => {
 
           {orders.length === 0 ? (
             <div className="profile-empty">
-              <p style={{ fontSize: 32 }}>🛍️</p>
+              <p style={{ fontSize: 32 }}></p>
               <p style={{ color: "#9ca3af", marginTop: 8 }}>No orders yet</p>
             </div>
           ) : (
@@ -233,7 +233,7 @@ const Profile = () => {
 
                       {/* ADDRESS */}
                       <div className="profile-address">
-                        📍 {o.customerInfo?.address}
+                         {o.customerInfo?.address}
                       </div>
 
                     </div>
