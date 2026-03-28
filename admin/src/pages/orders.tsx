@@ -60,7 +60,7 @@ const Orders = () => {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h2>Quản lý đơn hàng</h2>
 
       <div style={{ overflowX: "auto" }}>
