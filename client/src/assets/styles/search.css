@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 40px;
+    padding: 20px 40px;
     border-bottom: 1px solid #eee;
 }
 
@@ -31,10 +31,10 @@
 .search-results {
     flex: 1;
     overflow-y: auto;
-    padding: 10px 20px;
+    padding: 20px 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
     align-content: start;
 }
 
@@ -48,40 +48,37 @@
 .search-item {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 12px;
     cursor: pointer;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    align-items: center;
+    text-align: center;
 }
 
-.search-item:hover {
-    background: #f7f7f7;
+.search-item:hover .search-item-img {
+    opacity: 0.85;
 }
 
 .search-item img {
     width: 100%;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 .search-info {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    width: 100%;
+    margin-top: 10px;
 }
 
 .search-name {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .search-price {
-    font-size: 13px;
-    color: #777;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
 }
 
 .search-close-btn {
@@ -107,7 +104,7 @@
 }
 
 .search-suggestions {
-    padding: 10px 20px;
+    padding: 10px 40px;
     border-bottom: 1px solid #eee;
 }
 

@@ -72,25 +72,31 @@ body {
 /* CONTENT AREA */
 
 .category-content {
-  position: fixed;
-  top: 72px;
-  bottom: 90px;
-  left: 0;
-  right: 0;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  padding: 20px 40px;
+    position: fixed;
+    top: 72px;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    padding: 20px 40px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.category-content::-webkit-scrollbar {
+    display: none;
 }
 
 .bottom-nav {
-  position: fixed;
-  bottom: 5px;
-  left: 0;
-  width: 100%;
-  height: 80px;
-
-  z-index: 9999;
-  pointer-events: none;
+    position: fixed;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 9999;
+    pointer-events: none;
+    background: transparent; 
 }
 
 /* Base button */
