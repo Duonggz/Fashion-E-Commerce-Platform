@@ -107,16 +107,16 @@ tmdt-main/
 └──────┬───────┘        └──────┬───────┘
        │        REST + JWT     │
        └───────────┬───────────┘
-                    ▼
+                   ▼
             ┌───────────────┐
             │   server/     │
             │  Fastify API  │
             └───┬───────┬───┘
-                │        │
-        ┌───────▼───┐ ┌──▼─────────────┐
-        │ MongoDB   │ │ Cloudinary     │
-        │ (Mongoose)│ │ (image hosting)│
-        └───────────┘ └────────────────┘
+                │       │
+        ┌───────▼───┐ ┌─▼─────────────┐
+        │ MongoDB   │ │ Cloudinary    │
+        │ (Mongoose)│ │(image hosting)│
+        └───────────┘ └───────────────┘
                 │
         ┌───────▼─────────────┐
         │ VietQR + SePay      │
@@ -137,7 +137,7 @@ tmdt-main/
 ```
 pending → paid → shipping → success
    │                 │
-   └─ expired         └─ returned
+   └─ expired        └─ returned
                  │
                  └─ cancelled (from paid)
 ```
