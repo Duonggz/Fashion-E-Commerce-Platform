@@ -4,6 +4,9 @@ A monorepo e-commerce platform built with a **Fastify + MongoDB** backend and tw
 
 > Built as a capstone/coursework project to explore a production-style architecture: separate deployable apps for the storefront, admin panel, and API, tied together by a real payment integration rather than a mocked one.
 
+<img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/70aa48aa-8ab9-423a-8917-297704bf5cb4" />
+
+
 ## Table of Contents
 
 - [Overview](#overview)
