@@ -6,6 +6,7 @@ A monorepo e-commerce platform built with a **Fastify + MongoDB** backend and tw
 
 <img width="1917" height="907" alt="image" src="https://github.com/user-attachments/assets/70aa48aa-8ab9-423a-8917-297704bf5cb4" />
 https://tmdtclient.pages.dev/
+https://tmdtadmin.pages.dev/
 
 ## Table of Contents
 
